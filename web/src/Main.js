@@ -1,13 +1,29 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './SideBar.css'
 import './Main.css'
 
 function Main (props) {
+  const [geoLocation, setGeolocation] = useState()
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        console.log(position)
+      },
+      err => {
+        console.log(err)
+      },
+      {
+        timeout: 30000
+      }
+    )
+  }, [])
+
   return (
     <>
       <aside>
         <strong>Cadastrar</strong>
-
+        {geoLocation && geoLocation.teste}
         <form>
           <div className='input-block'>
             <label htmlFor='github_username'>Usuário do Github</label>
